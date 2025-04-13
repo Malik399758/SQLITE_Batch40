@@ -9,7 +9,7 @@ class UserModel{
 
   // constructor
 
- UserModel({required this.title,required this.description});
+ UserModel({required this.title,required this.description,});
 
  // convert into map
 

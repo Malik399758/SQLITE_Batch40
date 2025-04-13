@@ -1,7 +1,9 @@
 import 'dart:core';
 
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqlite_database_batch40/user_model/user-model.dart';
 
 // Global variable
 
@@ -47,12 +49,14 @@ class DbHelper{
    try{
      String createTable = (
          '''
-   create table $tableName(
-   $title text,
-   $description text
-   )
-   '''
+  CREATE TABLE $tableName (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    $title TEXT,
+    $description TEXT
+  )
+  '''
      );
+
      var openAccess = await getDatabasesPath();
      var path = join(openAccess,'batch40.db');
 
@@ -66,6 +70,39 @@ class DbHelper{
    return openDb;
 
   }
+
+  // Crud operation
+
+
+ // create
+
+ Future<int> createData(UserModel userModel)async{
+   try{
+     final db = await database;
+     await db!.insert(tableName, userModel.toMap());
+     print('Data inserted ');
+     return 1;
+   }catch(e){
+     print('Data created error ------->$e');
+     return 0;
+   }
+ }
+
+
+ // Read
+
+ Future<List<Map<String,dynamic>>> readData()async{
+   final db = await database;
+   return db!.query(tableName);
+ }
+
+
+
+
+
+
+
+
 
 
 
