@@ -3,18 +3,19 @@
 
 class UserModel{
   // declare variables
-
+  final int? id;
   final String title;
   final String description;
 
   // constructor
 
- UserModel({required this.title,required this.description,});
+ UserModel({required this.title,required this.description,this.id});
 
  // convert into map
 
  Map<String,dynamic> toMap(){
    return {
+      'id' : id,
      'title' : title,
      'description' : description,
    };
@@ -25,6 +26,7 @@ class UserModel{
 
  factory UserModel.fromMap(Map<String,dynamic> map){
    return UserModel(
+       id: map['id'],
        title: map['title'],
        description: map['description']);
  }

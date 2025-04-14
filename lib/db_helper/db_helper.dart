@@ -97,6 +97,26 @@ class DbHelper{
  }
 
 
+ // update
+
+Future<int> updateData(UserModel userModel)async{
+   final db = await database;
+   return db!.update(tableName,userModel.toMap(),where: 'id = ?',whereArgs: [userModel.id] );
+}
+
+// delete
+
+ Future<int> delete(int id)async{
+   final db = await database;
+   return db!.delete(tableName,where: 'id = ?',whereArgs: [id]);
+ }
+
+
+ // deleteAll
+Future<int> deleteAll()async{
+   final db = await database;
+   return db!.delete(tableName);
+}
 
 
 
